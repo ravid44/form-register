@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    /*
+    background-image: linear-gradient(rgb(102, 185, 236));
+    */
+    margin-top: 4em;
+}
+
+h1{
+    text-transform: uppercase;
+    text-align: center;
+    font-family:monospace;
+    font-size: 3rem;
+    
+}
+
+section{
+    display: flex;
+    justify-content: center;
+    gap: 5em;
+    margin-top: 5em; 
+    margin-left: 10em;   
+    /*
+    line-height: 2.3em;
+    */
+}
+
+section form{
+    line-height: 1.8rem;
+}
+
+input {
+    background-color: rgb(226, 224, 224);
+    padding: 8px;
+    padding-right: 13em;
+    padding-left: 1em;
+    border-radius: 8px;
+}
+
+label{
+    font-family: sans-serif;
+    font-weight: 700;
+    color: black;
+}
+
+.btn{
+    background-color: blue;
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn h3{
+    color: aliceblue;
+    text-align: center;
+    margin-top: 1.5em;
+    padding: 2%;
+}
+
+.btn:hover{
+    background-color: rgb(240, 12, 12);
+}
+
+/*
+section form{
+    border: 2px solid rgb(240, 236, 236);
+    width: 30%;
+    border: 0;
+    background-color: #fff;
+    padding: 50px;
+    margin-top: 3em;
+}
+*/
+.myImage img{
+    width: 70%;
+}
+
+</style>
+<body>
+    <header>
+        <h1>Form Register</h1>
+    </header>
+    <main>
+        <section>
+
+            <form action="myForm" class="myFormList">
+                <div class="input1">
+                    <label for="username">Username</label><br>
+                    <input type="text" id="username" placeholder="Vanravid" required><br>
+                    <span id="textName"></span>
+                </div>
+
+                <div class="input2">
+                    <label for="email">Email</label><br>
+                    <input type="email" id="email" placeholder="Vanravid@gmail.com" required><br>
+                    <span id="emailText"></span>
+
+                </div>
+
+                <div class="input3">
+                    <label for="password">Password</label><br>
+                    <input type="password" id="password" placeholder="Van12345" required><br>
+                    <span id="passwordText"></span>
+                </div>
+
+                <div class="input4">
+                    <label for="repeatpassword">Repeat Password</label><br>
+                    <input type="password" id="repeatpassword" placeholder="Van12345" required><br>
+                    <span id="repeatText"></span>
+                </div>
+
+                <div class="btn">
+                    <h3 id="registerBtn">Register</h3>
+                </div>
+
+            </form>
+
+            <!--image register-->
+            <div class="myImage">
+                <img src="/images/Forms (1).gif" alt="piclogin">
+            </div>
+
+        </section>
+    </main>
+</body>
+<script>
+    // username
+    let myUserName = document.getElementById("username");
+    let spanText = document.getElementById("textName");
+
+    //btnRegister
+    let myBtnRegis = document.getElementById("registerBtn");
+
+    myBtnRegis.addEventListener("click", () => {
+        myUserFunction();
+        myEmailFunction();
+        myPasswordFunction();
+        myRepeatFunction();
+    });
+
+    function myUserFunction() {
+        if (myUserName.value.length == "") {
+            spanText.textContent = "Please fill your name";
+            spanText.style.color = "red";
+        }
+        else if (myUserName.value.length >= 2) {
+            spanText.textContent = "Accepted";
+            spanText.style.color = "green";
+
+        }
+        else {
+            spanText.textContent = "Please fill 2 letters up";
+            spanText.style.color = "blue";
+        }
+    }
+
+    function myEmailFunction() {
+        let myUserEmail = document.getElementById("email");
+        let span2 = document.getElementById("emailText");
+        /*
+        const regex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3}$/;
+        a-zA-Z0-9._ and  a-zA-Z0-9.  = \w\;
+        */
+        const regex2 = /^[\w\%+-]+@[\w\-]+\.[a-zA-Z]{3}$/;
+        const result = regex2.test(myUserEmail.value);
+        console.log(result);
+
+        if (myUserEmail.value === "") {
+            span2.textContent = "Please fill email";
+            span2.style.color = "red";
+        }
+        else if (result) {
+            span2.textContent = "Correct";
+            span2.style.color = "green";
+        }
+        else{
+            span2.textContent = "please check email again";
+            span2.style.color = "blue";
+        }
+    }
+
+    function myPasswordFunction() {
+        let myUserPassword = document.getElementById("password");
+
+        let regex3 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8}$/;
+        let passwordRegex = regex3.   test(myUserPassword.value);
+
+        let span3 = document.getElementById("passwordText");
+
+        if (myUserPassword.value === "") {
+            span3.textContent = "Please fill password";
+            span3.style.color = "red";
+        }
+
+        else if (passwordRegex) {
+            span3.textContent = "Your password are correct";
+            span3.style.color = "blue";
+        }
+        else {
+            span3.textContent = "Please check your password again";
+            span3.style.color = "orange";
+        }
+
+    }
+
+    function myRepeatFunction() {
+        let myRepeatPass = document.getElementById("repeatpassword");
+        let span4 = document.getElementById("repeatText");
+
+        if (myRepeatPass.value == "") {
+            span4.textContent = "Please fill your password";
+            span4.style.color = "red";
+        }
+        else {
+            span4.textContent = "Successfull";
+            span4.style.color = "green";
+        }
+    }
+
+</script>
+
+</html>
